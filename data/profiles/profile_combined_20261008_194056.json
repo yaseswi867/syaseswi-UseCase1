@@ -1,0 +1,92 @@
+{
+  "files": [
+    "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\products.csv"
+  ],
+  "datasets": {
+    "products": {
+      "file": "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\products.csv",
+      "shape": {
+        "rows": 20,
+        "columns": 4
+      },
+      "columns": {
+        "product_id": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 20,
+          "sample_values": [
+            "P001",
+            "P002",
+            "P003",
+            "P004",
+            "P005"
+          ]
+        },
+        "product_name": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 20,
+          "sample_values": [
+            "iPhone 15",
+            "Samsung Galaxy S24",
+            "AirPods Pro",
+            "Sony WH-1000XM5",
+            "Levi's 501 Jeans"
+          ]
+        },
+        "category": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 5,
+          "sample_values": [
+            "Electronics",
+            "Electronics",
+            "Electronics",
+            "Electronics",
+            "Apparel"
+          ]
+        },
+        "standard_price": {
+          "dtype": "float64",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 19,
+          "min": 12.99,
+          "max": 999.99,
+          "mean": 259.2405
+        }
+      }
+    }
+  },
+  "analysis": {
+    "semantic_meanings": {
+      "products": {
+        "product_id": "Unique alphanumeric business key identifying each product (format: P001\u2013P020); serves as the natural primary key for the products master table and a foreign key join target in transactional datasets",
+        "product_name": "Human-readable display label for the product; fully unique across all 20 records; spans consumer electronics and apparel categories; used for reporting, lookup, and UI display",
+        "category": "Low-cardinality product classification dimension with 5 distinct values (e.g., Electronics, Apparel); used for segmentation, group-by aggregations, and category-level reporting in downstream layers",
+        "standard_price": "Reference list price in USD (float64); ranges from $12.99 to $999.99 with a mean of $259.24; represents the baseline pricing value for margin calculations and price comparison logic; note: 19 unique values across 20 rows indicates one duplicate price shared by two distinct products"
+      }
+    },
+    "join_keys": [
+      {
+        "left_dataset": "products",
+        "left_column": "product_id",
+        "right_dataset": "transactions / orders / inventory / order_items (anticipated)",
+        "right_column": "product_id",
+        "confidence": "high"
+      }
+    ],
+    "quality_notes": [
+      "products.product_id: 20 unique values across 20 rows \u2014 confirmed true primary key with zero nulls; safe to use as a join anchor in STTM mappings",
+      "products.product_name: 20 unique values across 20 rows \u2014 no duplicate product names detected; zero nulls; field is reliable for display and lookup purposes",
+      "products.category: Only 5 distinct categories across 20 products \u2014 low-cardinality field suitable for dimension table materialisation in the Silver/Gold layers; zero nulls; category distribution across 20 rows should be validated for class imbalance",
+      "products.standard_price: 19 unique values across 20 rows \u2014 exactly one price value is shared by two different products; this is not necessarily erroneous but should be reviewed to confirm it is not a data entry duplication; price range ($12.99\u2013$999.99) and mean ($259.24) are realistic for a mixed consumer goods catalogue",
+      "Overall dataset quality: Zero null values across all 4 columns and all 20 rows \u2014 the landing file is clean and requires no null-handling transformations in the Bronze-to-Silver pipeline step",
+      "Dataset is small (20 rows \u00d7 4 columns) \u2014 confirm this is a complete extract and not a truncated or sample file before promoting to production pipeline runs",
+      "No date/timestamp columns present \u2014 product creation date, last modified date, or effective dating fields are absent; consider enriching in the Silver layer if SCD (Slowly Changing Dimension) tracking is required"
+    ]
+  }
+}

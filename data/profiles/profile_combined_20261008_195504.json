@@ -1,0 +1,352 @@
+{
+  "files": [
+    "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\stores.csv",
+    "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\sales_data.csv",
+    "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\products.csv"
+  ],
+  "datasets": {
+    "stores": {
+      "file": "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\stores.csv",
+      "shape": {
+        "rows": 10,
+        "columns": 5
+      },
+      "columns": {
+        "store_id": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 10,
+          "sample_values": [
+            "S01",
+            "S02",
+            "S03",
+            "S04",
+            "S05"
+          ]
+        },
+        "store_name": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 10,
+          "sample_values": [
+            "Downtown Flagship",
+            "Westfield Mall",
+            "Harbor View",
+            "Peach Tree Center",
+            "Bayfront Store"
+          ]
+        },
+        "region": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 4,
+          "sample_values": [
+            "Northeast",
+            "Northeast",
+            "Northeast",
+            "Southeast",
+            "Southeast"
+          ]
+        },
+        "city": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 10,
+          "sample_values": [
+            "New York",
+            "Boston",
+            "Philadelphia",
+            "Atlanta",
+            "Miami"
+          ]
+        },
+        "state": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 9,
+          "sample_values": [
+            "NY",
+            "MA",
+            "PA",
+            "GA",
+            "FL"
+          ]
+        }
+      }
+    },
+    "sales_data": {
+      "file": "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\sales_data.csv",
+      "shape": {
+        "rows": 20,
+        "columns": 11
+      },
+      "columns": {
+        "transaction_id": {
+          "dtype": "str",
+          "null_count": 1,
+          "null_pct": 5.0,
+          "unique_count": 18,
+          "sample_values": [
+            "TXN10046",
+            "TXN10078",
+            "RET10009",
+            "RET10004",
+            "TXN10124"
+          ]
+        },
+        "transaction_date": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 17,
+          "sample_values": [
+            "01/15/2024",
+            "2024-01-17",
+            "2024-03-03",
+            "2024-02-20",
+            "2024-02-25"
+          ]
+        },
+        "store_id": {
+          "dtype": "str",
+          "null_count": 2,
+          "null_pct": 10.0,
+          "unique_count": 7,
+          "sample_values": [
+            "S09",
+            "S10",
+            "S07",
+            "S06",
+            "S10"
+          ]
+        },
+        "product_id": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 10,
+          "sample_values": [
+            "P001",
+            "P014",
+            "P012",
+            "P012",
+            "P002"
+          ]
+        },
+        "product_name": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 10,
+          "sample_values": [
+            "iPhone 15",
+            "TRX Resistance Bands",
+            "Nespresso Machine",
+            "Nespresso Machine",
+            "Samsung Galaxy S24"
+          ]
+        },
+        "category": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 13,
+          "sample_values": [
+            "Electronics",
+            "Sport",
+            "Home & Kitchen",
+            "Home & Kitchen",
+            "Elec."
+          ]
+        },
+        "quantity": {
+          "dtype": "int64",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 9,
+          "min": -2.0,
+          "max": 8.0,
+          "mean": 3.95
+        },
+        "unit_price": {
+          "dtype": "float64",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 19,
+          "min": 0.01,
+          "max": 9999.99,
+          "mean": 799.9875
+        },
+        "total_amount": {
+          "dtype": "float64",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 19,
+          "min": -387.64,
+          "max": 9999.99,
+          "mean": 2234.7355000000002
+        },
+        "customer_segment": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 9,
+          "sample_values": [
+            "Loyal",
+            "Premium",
+            "Loyal",
+            "Premium",
+            "Prem"
+          ]
+        },
+        "payment_method": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 4,
+          "sample_values": [
+            "Apple Pay",
+            "PayPal",
+            "Apple Pay",
+            "Apple Pay",
+            "Debit Card"
+          ]
+        }
+      }
+    },
+    "products": {
+      "file": "C:\\Users\\syaseswi\\Downloads\\syaseswi_deloitte-main\\data\\landing\\products.csv",
+      "shape": {
+        "rows": 20,
+        "columns": 4
+      },
+      "columns": {
+        "product_id": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 20,
+          "sample_values": [
+            "P001",
+            "P002",
+            "P003",
+            "P004",
+            "P005"
+          ]
+        },
+        "product_name": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 20,
+          "sample_values": [
+            "iPhone 15",
+            "Samsung Galaxy S24",
+            "AirPods Pro",
+            "Sony WH-1000XM5",
+            "Levi's 501 Jeans"
+          ]
+        },
+        "category": {
+          "dtype": "str",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 5,
+          "sample_values": [
+            "Electronics",
+            "Electronics",
+            "Electronics",
+            "Electronics",
+            "Apparel"
+          ]
+        },
+        "standard_price": {
+          "dtype": "float64",
+          "null_count": 0,
+          "null_pct": 0.0,
+          "unique_count": 19,
+          "min": 12.99,
+          "max": 999.99,
+          "mean": 259.2405
+        }
+      }
+    }
+  },
+  "analysis": {
+    "semantic_meanings": {
+      "stores": {
+        "store_id": "Unique alphanumeric identifier for each retail store (primary key, format: S##)",
+        "store_name": "Human-readable display name of the retail store location",
+        "region": "High-level geographic sales region grouping (e.g., Northeast, Southeast) \u2014 4 distinct regions across 10 stores",
+        "city": "City in which the store is physically located \u2014 10 unique cities, one per store",
+        "state": "US state abbreviation for the store location \u2014 9 unique states across 10 stores"
+      },
+      "sales_data": {
+        "transaction_id": "Unique transaction identifier \u2014 prefix TXN= sale, RET= return/refund; 5% null rate and potential duplicate detected; primary key integrity at risk",
+        "transaction_date": "Date on which the transaction occurred \u2014 stored as raw string in mixed formats (MM/DD/YYYY and YYYY-MM-DD); requires normalisation before use",
+        "store_id": "Foreign key referencing stores.store_id \u2014 identifies the store where the transaction occurred; 10% null rate means 2 of 20 transactions are unattributable to a store",
+        "product_id": "Foreign key referencing products.product_id \u2014 identifies the product transacted; fully populated, 10 distinct products appear in transactions",
+        "product_name": "Denormalised product display name copied from the product catalog \u2014 redundant with products.product_name; should be resolved via join in Silver layer",
+        "category": "Denormalised product category copied from the product catalog \u2014 contains dirty/abbreviated values (e.g., 'Elec.' vs 'Electronics'); 13 unique values vs 5 canonical values in products.category",
+        "quantity": "Number of units sold or returned in the transaction \u2014 negative values indicate return/refund records; range -2 to 8",
+        "unit_price": "Price per unit charged at time of transaction \u2014 ranges from $0.01 to $9,999.99; extreme outliers suspected; may deviate from products.standard_price",
+        "total_amount": "Total monetary value of the transaction (quantity \u00d7 unit_price) \u2014 negative values confirm return records; range -$387.64 to $9,999.99",
+        "customer_segment": "Customer loyalty/value tier classification at time of transaction \u2014 contains abbreviation inconsistencies (e.g., 'Prem' vs 'Premium'); 9 unique values suggest dirty data",
+        "payment_method": "Payment instrument used for the transaction \u2014 4 distinct methods: Apple Pay, PayPal, Debit Card, and at least one other"
+      },
+      "products": {
+        "product_id": "Unique alphanumeric identifier for each product in the catalog (primary key, format: P###) \u2014 20 unique values, fully clean",
+        "product_name": "Official product display name as defined in the master catalog \u2014 20 unique, fully populated",
+        "category": "Canonical product category classification \u2014 5 distinct categories; authoritative source for resolving dirty category values in sales_data",
+        "standard_price": "Official list/catalog price for the product \u2014 range $12.99 to $999.99; serves as reference baseline for validating sales_data.unit_price deviations"
+      }
+    },
+    "join_keys": [
+      {
+        "left_dataset": "sales_data",
+        "left_column": "store_id",
+        "right_dataset": "stores",
+        "right_column": "store_id",
+        "confidence": "high"
+      },
+      {
+        "left_dataset": "sales_data",
+        "left_column": "product_id",
+        "right_dataset": "products",
+        "right_column": "product_id",
+        "confidence": "high"
+      },
+      {
+        "left_dataset": "sales_data",
+        "left_column": "product_name",
+        "right_dataset": "products",
+        "right_column": "product_name",
+        "confidence": "medium"
+      },
+      {
+        "left_dataset": "sales_data",
+        "left_column": "category",
+        "right_dataset": "products",
+        "right_column": "category",
+        "confidence": "low"
+      }
+    ],
+    "quality_notes": [
+      "sales_data.transaction_id has a 5% null rate (1 of 20 rows) and only 18 unique values across 20 rows, indicating a missing primary key and a likely duplicate record \u2014 primary key constraint cannot be enforced without remediation",
+      "sales_data.store_id has a 10% null rate (2 of 20 rows), meaning 2 transactions cannot be joined to the stores dimension \u2014 these records will be lost in any INNER JOIN and must be handled explicitly (default store, reject queue, or NULL-safe LEFT JOIN)",
+      "sales_data.transaction_date is stored as a raw string with mixed date formats (MM/DD/YYYY and YYYY-MM-DD across 17 unique values) \u2014 must be parsed and normalised to ISO 8601 (YYYY-MM-DD) before Bronze-to-Silver promotion",
+      "sales_data.category contains 13 unique values versus 5 canonical categories in products.category \u2014 dirty values identified include abbreviations such as 'Elec.' instead of 'Electronics'; a category lookup/standardisation map is required in the Silver transformation",
+      "sales_data.customer_segment contains 9 unique values suggesting abbreviation variants (e.g., 'Prem' vs 'Premium') \u2014 a segment standardisation lookup table should be applied during cleansing",
+      "sales_data.quantity has a minimum value of -2 and sales_data.total_amount has a minimum of -387.64, confirming return/refund transactions are co-mingled with sales records (identified by 'RET' prefix in transaction_id) \u2014 Silver layer should split or flag these as a separate transaction_type dimension",
+      "sales_data.unit_price ranges from $0.01 to $9,999.99 while products.standard_price ranges from $12.99 to $999.99 \u2014 the 10x upper discrepancy and near-zero lower bound indicate potential data entry errors or test records; a price variance threshold check should be implemented",
+      "sales_data.product_name and sales_data.category are denormalised columns that duplicate information available in the products dimension \u2014 these should be dropped from the Silver fact table and resolved via join to products on product_id to ensure single source of truth",
+      "stores dataset is fully clean: no nulls across all 5 columns, all primary keys unique, consistent formatting throughout \u2014 safe to load as-is to Bronze and Silver",
+      "products dataset is fully clean: no nulls across all 4 columns, all 20 product_id values are unique \u2014 safe to load as-is; standard_price should serve as the authoritative price reference for downstream margin and discount calculations"
+    ]
+  }
+}

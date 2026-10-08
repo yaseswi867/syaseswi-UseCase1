@@ -1,0 +1,21 @@
+transaction_id,transaction_date,store_id,product_id,product_name,category,quantity,unit_price,total_amount,customer_segment,payment_method
+TXN10046,01/15/2024,S09,P001,iPhone 15,Electronics,7,1034.37,7240.59,Loyal,Apple Pay
+TXN10078,2024-01-17,S10,P014,TRX Resistance Bands,Sport,7,55.79,390.53,Premium,PayPal
+RET10009,2024-03-03,S07,P012,Nespresso Machine,Home & Kitchen,-1,192.03,-192.03,Loyal,Apple Pay
+RET10004,2024-02-20,S06,P012,Nespresso Machine,Home & Kitchen,-2,193.82,-387.64,Premium,Apple Pay
+TXN10124,2024-02-25,S10,P002,Samsung Galaxy S24,Elec.,8,898.15,7185.2,Prem,Debit Card
+TXN10113,2024-03-30,S05,P016,CamelBak Water Bottle,Sports,6,30.33,181.98,Bgt,Debit Card
+TXN10055,2024-01-27,S04,P003,AirPods Pro,Electronic,4,230.11,1030.89,Standard,Apple Pay
+TXN10138,2024-02-25,S10,P012,Nespresso Machine,HOME & KITCHEN,2,202.07,404.14,Loyal,Credit Card
+TXN10112,01-03-2024,S03,P002,Samsung Galaxy S24,Electronics,8,848.83,6790.64,Std,Credit Card
+TXN10080,01-31-2024,S05,P006,Nike Air Max,apparel,6,121.91,819.24,Standard,PayPal
+TXN10030,2024-03-07,,P003,AirPods Pro,Electronics,5,231.3,1156.5,Loyal,Debit Card
+TXN10015,01-27-2024,S03,P015,Bowflex Dumbbells,sports,4,295.2,1180.8,Budget,Apple Pay
+TXN10046,01/15/2024,S09,P001,iPhone 15,Electronics,7,1034.37,7240.59,Loyal,Apple Pay
+TXN10109,2024-01-25,S04,P012,Nespresso Machine,Home,2,207.22,414.44,BUDGET,PayPal
+,03/05/2024,S06,P014,TRX Resistance Bands,Sport,4,57.15,228.6,Loyal,Credit Card
+TXN20001,2024-03-15,S03,P002,Samsung Galaxy S24,Electronics,1,9999.99,9999.99,Premium,Credit Card
+TXN20002,2024-03-10,S05,P020,Neutrogena SPF 50,Beauty,1,0.01,0.01,Premium,Credit Card
+TXN10157,2024-03-07,S05,P003,AirPods Pro,electronics,2,268.4,536.8,Loyal,PayPal
+TXN10101,2024-01-24,S03,P016,CamelBak Water Bottle,Sports,2,29.69,59.38,standard,Credit Card
+TXN10033,2024-01-31,,P005,Levi's 501 Jeans,Apparel,6,69.01,414.06,Budget,Apple Pay

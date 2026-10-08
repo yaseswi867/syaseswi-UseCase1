@@ -1,0 +1,9 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+raw,products_bronze,,cleansed,products_bronze,pk_products_silver_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+raw,products_bronze,product_id,cleansed,products_bronze,product_id,Type Cast,Cast product_id to STRING; retain value as-is
+raw,products_bronze,product_name,cleansed,products_bronze,product_name,Cleansing,Cast to STRING; trim leading and trailing whitespace; replace NULL or empty string with NULL; standardise to title case
+raw,products_bronze,category,cleansed,products_bronze,category,Cleansing,Cast to STRING; trim leading and trailing whitespace; replace NULL or empty string with NULL; standardise to title case
+raw,products_bronze,standard_price,cleansed,products_bronze,standard_price,Cleansing,"Cast to DECIMAL(18,2); replace NULL, empty, or non-numeric values with NULL; ensure value is non-negative, set to NULL if negative"
+raw,products_bronze,_load_timestamp,cleansed,products_bronze,_load_timestamp,Date Standardisation,Cast to TIMESTAMP WITH TIME ZONE; parse ISO 8601 format (yyyy-MM-ddTHH:mm:ss.SSSSSSZ); replace NULL or unparseable values with NULL; standardise timezone to UTC
+raw,products_bronze,_source_file,cleansed,products_bronze,_source_file,Cleansing,Cast to STRING; trim leading and trailing whitespace; replace NULL or empty string with NULL; retain full file path value as-is
+raw,products_bronze,product_id,cleansed,products_bronze,product_id,Deduplication,"Remove duplicate rows where all of product_id, product_name, category, standard_price are identical; retain the record with the latest _load_timestamp; if _load_timestamp is equal, retain the first occurrence by row order"

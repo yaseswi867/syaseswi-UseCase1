@@ -1,0 +1,73 @@
+# Environment variables and secrets
+.env
+.chroma/
+*.key
+*.pem
+*.p12
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+.venv-1/
+ENV/
+env/
+virtualenv/
+.acceleratewithai/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+*.log
+logs/
+
+# Data files (optional - uncomment if you don't want to track data)
+# data/bronze/*.parquet
+# data/silver/*.parquet
+# data/gold/*.parquet
+# data/profiles/*.json
+# data/reports/*.html
+# data/traces/*.json
+# audit_logs/*.jsonl
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+temp/
+tmp/

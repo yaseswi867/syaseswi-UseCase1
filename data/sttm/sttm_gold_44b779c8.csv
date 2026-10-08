@@ -1,0 +1,48 @@
+source_schema,source_table,source_column,target_schema,target_table,target_column,transformation_type,transformation_logic
+cleansed,,,analytics,fact_sales,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+cleansed,sales_data_silver,transaction_id,analytics,fact_sales,transaction_id,Direct,Passthrough from sales_data_silver.transaction_id
+cleansed,sales_data_silver,transaction_date,analytics,fact_sales,transaction_date,Direct,Passthrough from sales_data_silver.transaction_date; retain as DATE type; rows where transaction_date IS NULL are retained but flagged via is_date_missing indicator
+cleansed,sales_data_silver,transaction_date,analytics,fact_sales,is_date_missing,Derived,CASE WHEN sales_data_silver.transaction_date IS NULL THEN TRUE ELSE FALSE END
+cleansed,sales_data_silver,store_id,analytics,fact_sales,store_id,Direct,Passthrough from sales_data_silver.store_id; used as foreign key joining to dim_store
+cleansed,sales_data_silver,product_id,analytics,fact_sales,product_id,Direct,Passthrough from sales_data_silver.product_id; used as foreign key joining to dim_product
+cleansed,sales_data_silver,quantity,analytics,fact_sales,quantity,Direct,Passthrough from sales_data_silver.quantity; negative values indicate returns
+cleansed,sales_data_silver,unit_price,analytics,fact_sales,unit_price,Direct,Passthrough from sales_data_silver.unit_price as DOUBLE
+cleansed,sales_data_silver,total_amount,analytics,fact_sales,total_amount,Direct,Passthrough from sales_data_silver.total_amount as DOUBLE; negative values indicate return transactions
+cleansed,sales_data_silver,transaction_id,analytics,fact_sales,transaction_type,Derived,CASE WHEN sales_data_silver.transaction_id LIKE 'RET%' THEN 'Return' WHEN sales_data_silver.transaction_id LIKE 'TXN%' THEN 'Sale' ELSE 'Unknown' END
+cleansed,sales_data_silver,customer_segment,analytics,fact_sales,customer_segment,Derived,"Standardise customer_segment: CASE WHEN LOWER(TRIM(sales_data_silver.customer_segment)) IN ('prem','premium') THEN 'Premium' WHEN LOWER(TRIM(sales_data_silver.customer_segment)) = 'loyal' THEN 'Loyal' ELSE INITCAP(TRIM(sales_data_silver.customer_segment)) END"
+cleansed,sales_data_silver,payment_method,analytics,fact_sales,payment_method,Direct,Passthrough from sales_data_silver.payment_method
+cleansed,sales_data_silver,load_timestamp,analytics,fact_sales,silver_load_timestamp,Direct,Passthrough from sales_data_silver.load_timestamp cast to TIMESTAMP WITH TIME ZONE
+cleansed,,,analytics,fact_sales,gold_load_timestamp,Indirect,System-generated UTC timestamp at the time the Gold layer pipeline executes; CURRENT_TIMESTAMP()
+cleansed,,,analytics,dim_store,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+cleansed,stores_silver,store_id,analytics,dim_store,store_id,Direct,Passthrough from stores_silver.store_id; natural business key
+cleansed,stores_silver,store_name,analytics,dim_store,store_name,Direct,Passthrough from stores_silver.store_name
+cleansed,stores_silver,region,analytics,dim_store,region,Direct,Passthrough from stores_silver.region; supports regional sales performance analysis
+cleansed,stores_silver,city,analytics,dim_store,city,Direct,Passthrough from stores_silver.city; supports city-level sales performance analysis
+cleansed,stores_silver,state,analytics,dim_store,state,Direct,Passthrough from stores_silver.state
+cleansed,stores_silver,load_timestamp,analytics,dim_store,silver_load_timestamp,Direct,Passthrough from stores_silver.load_timestamp cast to TIMESTAMP WITH TIME ZONE
+cleansed,,,analytics,dim_store,gold_load_timestamp,Indirect,System-generated UTC timestamp at the time the Gold layer pipeline executes; CURRENT_TIMESTAMP()
+cleansed,,,analytics,dim_product,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+cleansed,products_silver,product_id,analytics,dim_product,product_id,Direct,Passthrough from products_silver.product_id; natural business key
+cleansed,products_silver,product_name,analytics,dim_product,product_name,Direct,Passthrough from products_silver.product_name; use products_silver as the authoritative source in preference to sales_data_silver.product_name
+cleansed,products_silver,category,analytics,dim_product,category,Derived,"Standardise category using products_silver as master: join sales_data_silver to products_silver on product_id and replace noisy category values (e.g. 'Elec.', 'Sport') with products_silver.category; where no match exists apply INITCAP(TRIM(products_silver.category))"
+cleansed,products_silver,standard_price,analytics,dim_product,standard_price,Direct,Passthrough from products_silver.standard_price as DOUBLE
+cleansed,products_silver,load_timestamp,analytics,dim_product,silver_load_timestamp,Direct,Passthrough from products_silver.load_timestamp cast to TIMESTAMP WITH TIME ZONE
+cleansed,,,analytics,dim_product,gold_load_timestamp,Indirect,System-generated UTC timestamp at the time the Gold layer pipeline executes; CURRENT_TIMESTAMP()
+cleansed,,,analytics,dim_date,pk_gold_id,Indirect,Auto-generated sequential surrogate primary key starting from 1
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,date_key,Derived,CAST(sales_data_silver.transaction_date AS DATE) formatted as YYYYMMDD integer; distinct non-null dates from sales_data_silver.transaction_date
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,full_date,Derived,CAST(sales_data_silver.transaction_date AS DATE); distinct non-null values
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,day_of_week,Derived,DAYOFWEEK(sales_data_silver.transaction_date) returning integer 1=Sunday through 7=Saturday
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,day_name,Derived,"DATE_FORMAT(sales_data_silver.transaction_date, 'EEEE') returning full day name e.g. Monday"
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,week_of_year,Derived,WEEKOFYEAR(sales_data_silver.transaction_date)
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,month_number,Derived,MONTH(sales_data_silver.transaction_date)
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,month_name,Derived,"DATE_FORMAT(sales_data_silver.transaction_date, 'MMMM') returning full month name e.g. January"
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,quarter_number,Derived,QUARTER(sales_data_silver.transaction_date) returning integer 1 through 4
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,quarter_label,Derived,"CONCAT('Q', QUARTER(sales_data_silver.transaction_date), '-', YEAR(sales_data_silver.transaction_date)) e.g. Q1-2024"
+cleansed,sales_data_silver,transaction_date,analytics,dim_date,year_number,Derived,YEAR(sales_data_silver.transaction_date)
+cleansed,,,analytics,dim_date,gold_load_timestamp,Indirect,System-generated UTC timestamp at the time the Gold layer pipeline executes; CURRENT_TIMESTAMP()
+cleansed,sales_data_silver,transaction_id,analytics,fact_sales,fk_store_id,Derived,Lookup dim_store.pk_gold_id WHERE dim_store.store_id = sales_data_silver.store_id; resolve foreign key relationship between fact_sales and dim_store
+cleansed,sales_data_silver,transaction_id,analytics,fact_sales,fk_product_id,Derived,Lookup dim_product.pk_gold_id WHERE dim_product.product_id = sales_data_silver.product_id; resolve foreign key relationship between fact_sales and dim_product
+cleansed,sales_data_silver,transaction_date,analytics,fact_sales,fk_date_key,Derived,Lookup dim_date.pk_gold_id WHERE dim_date.full_date = CAST(sales_data_silver.transaction_date AS DATE); NULL when transaction_date is missing
+cleansed,sales_data_silver,total_amount,analytics,fact_sales,net_sales_amount,Derived,CASE WHEN sales_data_silver.transaction_id LIKE 'RET%' THEN 0.0 ELSE sales_data_silver.total_amount END; excludes return transaction amounts from net sales; returns are tracked via return_amount column
+cleansed,sales_data_silver,total_amount,analytics,fact_sales,return_amount,Derived,CASE WHEN sales_data_silver.transaction_id LIKE 'RET%' THEN ABS(sales_data_silver.total_amount) ELSE 0.0 END; captures the absolute monetary value of returns
+cleansed,sales_data_silver,unit_price,analytics,fact_sales,price_vs_standard_variance,Derived,sales_data_silver.unit_price - dim_product.standard_price resolved via JOIN on product_id; indicates discount or premium pricing relative to standard; NULL where standard_price not available

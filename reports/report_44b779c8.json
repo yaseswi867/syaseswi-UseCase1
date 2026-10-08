@@ -1,0 +1,25 @@
+{
+  "direct_answer": {
+    "question": "Which stores and product categories are driving the highest sales, and how does sales performance vary by region, city and customer segment?",
+    "answer": "Gateway West (Los Angeles, West) leads all stores with $13,999.86 gross revenue, followed by Harbor View (Philadelphia, Northeast) at $8,909.85 and Bay Area Hub (San Francisco, West) at $7,619.83. Electronics dominates product categories with $31,199.58 in revenue (88.5% of total), powered by Samsung Galaxy S24 ($14,449.83) and iPhone 15 ($13,999.86). The West region is the top-performing region at $21,619.69, nearly 2.4\u00d7 the Northeast ($8,909.85) and 7\u00d7 the Southeast ($3,052.75). Loyal customers generate the highest segment revenue at $16,389.73 with the highest average basket value of $2,731.62.",
+    "why": "fact_sales joined with dim_store and dim_product reveals that only 3 regions have positive sales (West, Northeast, Southeast). West is driven by two California stores selling high-ticket Electronics to Loyal and Premium segments. The Electronics category's dominance is driven by average unit prices of $662.49 vs. $95.99 for Sports and $94.99 for Apparel. Loyal customers generate 47% of total revenue despite 33% of transaction share, indicating higher average basket sizes.",
+    "approach": "Executed 8 analytical SQL queries joining fact_sales with dim_store and dim_product on store_id and product_id respectively. Revenue was computed as quantity \u00d7 standard_price for positive quantity transactions (sales), excluding returns (negative quantity). Customer segment labels were normalised using CASE WHEN to harmonise variants like 'Prem'/'premium' \u2192 'Premium', 'Bgt'/'BUDGET' \u2192 'Budget', 'Std'/'standard' \u2192 'Standard'."
+  },
+  "charts": [
+    {
+      "type": "bar",
+      "title": "Total Revenue by Store",
+      "x_column": "store_name",
+      "y_column": "total_revenue",
+      "reason": "Directly ranks all stores by revenue to identify top and bottom performers \u2014 Gateway West and Harbor View clearly lead."
+    },
+    {
+      "type": "pie",
+      "title": "Revenue Share by Product Category",
+      "labels_column": "category",
+      "values_column": "total_revenue",
+      "reason": "Shows the overwhelming dominance of Electronics (88.5%) versus all other categories, directly answering the category question."
+    }
+  ],
+  "detailed_analysis": "The West region's performance is driven almost entirely by two stores in California \u2014 Gateway West in Los Angeles and Bay Area Hub in San Francisco \u2014 which together generate $21,619.69, or 64% of all tracked regional revenue. These stores predominantly serve Loyal ($14,399.84) and Premium ($7,219.85) customer segments, who purchase high-value Electronics products. This creates a virtuous cycle: affluent West Coast urban markets attract high-income shoppers who gravitate toward premium Electronics, inflating both unit revenue and average basket value far above other regions.\n\nThe Northeast shows solid per-store efficiency: Harbor View in Philadelphia alone generates $8,909.85 across just 4 transactions, with an impressive average revenue per transaction of $2,227.46 \u2014 the highest efficiency ratio among identified stores. The Northeast's Standard segment surprisingly generates substantial revenue ($6,859.90), suggesting that even non-premium segments buy high-ticket Electronics in this market. Conversely, the Southeast underperforms significantly with 3 stores generating only $3,052.75 combined, with Magnolia Square (Charlotte) actually posting a negative net revenue of -$147.68 due to returns exceeding sales.\n\nFrom a product lens, Samsung Galaxy S24 ($14,449.83) narrowly edges iPhone 15 ($13,999.86) as the top revenue product despite Apple's higher per-unit price ($999.99 vs $849.99), owing to higher sales volume (17 units vs 14 units). AirPods Pro ranks third at $2,749.89, confirming a strong consumer electronics ecosystem effect. Non-electronics categories \u2014 Sports ($2,099.77), Apparel ($1,139.88), Home & Kitchen ($799.96) \u2014 collectively account for only 11.5% of revenue, representing significant expansion opportunities if cross-selling strategies are applied across the high-performing West and Northeast store clusters."
+}

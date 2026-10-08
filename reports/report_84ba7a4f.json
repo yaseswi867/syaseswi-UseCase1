@@ -1,0 +1,25 @@
+{
+  "direct_answer": {
+    "question": "List Category wise highest priced product detail",
+    "answer": "Across 5 product categories with 20 total products (4 per category), the highest priced products are: Electronics \u2192 iPhone 15 ($999.99), Beauty \u2192 Dyson Airwrap ($599.99), Home & Kitchen \u2192 Vitamix Blender ($449.99), Sports \u2192 Bowflex Dumbbells ($299.99), Apparel \u2192 Patagonia Fleece ($149.99). Electronics leads with the highest category maximum at $999.99, while Apparel has the lowest at $149.99.",
+    "why": "Using RANK() window function partitioned by category and ordered by price descending, the rank-1 product per category was identified. Electronics' iPhone 15 commands the highest price at $999.99 \u2014 6.7\u00d7 more expensive than Apparel's top product. Beauty's Dyson Airwrap at $599.99 stands out as a premium outlier in its category, as it is 3\u00d7 costlier than the next product in that category (La Mer Cream at $195). Sports shows the widest price gap proportionally \u2014 Bowflex Dumbbells at $299.99 vs. the cheapest item (Camelbak at $29.99), a 10\u00d7 spread.",
+    "approach": "Queried the gold_category_highest_priced_product table using a CTE with RANK() OVER (PARTITION BY category ORDER BY price_diff_from_category_max DESC) to identify the single highest-priced product per category. A second query computed pct_of_category_max and products_in_category for full category breakdown and comparative analysis."
+  },
+  "charts": [
+    {
+      "type": "bar",
+      "title": "Highest Priced Product per Category",
+      "x_column": "category",
+      "y_column": "price",
+      "reason": "Directly answers the business question by showing which category commands the highest maximum price, making cross-category price comparison immediate and intuitive."
+    },
+    {
+      "type": "bar",
+      "title": "Category-wise Price Distribution \u2014 All Products vs. Category Max",
+      "x_column": "product_name",
+      "y_column": "pct_of_category_max",
+      "reason": "Shows how each product's price compares to its category maximum (100% = highest priced), revealing intra-category pricing spread and confirming the top-ranked product in each group."
+    }
+  ],
+  "detailed_analysis": "The Gold table contains 20 products evenly distributed across 5 categories (4 products each). The category-wise highest priced products reveal a clear pricing hierarchy: Electronics leads at $999.99 (iPhone 15), followed by Beauty at $599.99 (Dyson Airwrap), Home & Kitchen at $449.99 (Vitamix Blender), Sports at $299.99 (Bowflex Dumbbells), and Apparel at $149.99 (Patagonia Fleece). Notably, Electronics has a healthy competitive spread \u2014 Samsung Galaxy S24 at $849.99 is 85% of the max \u2014 whereas Beauty shows extreme price polarisation: the Dyson Airwrap at $599.99 is followed by La Mer Cream at only $195 (32.5% of max), with Cerave and Neutrogena at $16.99 and $12.99 respectively, making the Airwrap nearly 46\u00d7 more expensive than the cheapest item in its category.\n\nSports demonstrates the starkest intra-category spread in relative terms: the Bowflex Dumbbells top the category at $299.99, while the Camelbak Water Bottle sits at just $29.99 \u2014 a 10\u00d7 ratio and only 10% of the category max. Home & Kitchen shows the most balanced distribution with Vitamix Blender ($449.99), KitchenAid Mixer ($349.99, 77.8%), Nespresso Machine ($199.99, 44.4%), and Instant Pot Duo ($89.99, 20%). Apparel is also relatively balanced with Nike Air Max at 80% of the Patagonia Fleece max.\n\nFrom a business strategy standpoint, Electronics and Beauty represent premium pricing opportunities \u2014 the highest absolute prices in those categories indicate customers are willing to pay a significant premium for flagship technology and luxury personal care products. Retailers should ensure these high-value items (iPhone 15, Dyson Airwrap, Vitamix Blender) are prominently featured in marketing campaigns, as they serve as category anchors that elevate the perceived value of the entire product range."
+}
